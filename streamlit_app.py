@@ -69,13 +69,11 @@ def main(session: snowpark.Session):
     # Convert MONTHLY_ to datetime for proper sorting
     df_avg_overall['MONTHLY_'] = pd.to_datetime(df_avg_overall['MONTHLY_'], format='%b-%Y')
     df_avg_overall_w['SORT_KEY'] = pd.to_datetime(df_avg_overall_w['WEEKLY_'].str[2:], format='%b-%d-%Y') 
-    df_avg_components['MONTHLY_'] = pd.to_datetime(df_avg_components['MONTHLY_'], format='%b-%Y')
-    df_avg_components_w['SORT_KEYW'] = pd.to_datetime(df_avg_components_w['WEEKLY_'].str[2:], format='%b-%d-%Y')
+
     # Sort the DataFrame by MONTHLY_
     df_avg_overall = df_avg_overall.sort_values('MONTHLY_')
     df_avg_overall_w = df_avg_overall_w.sort_values('SORT_KEY')
-    df_avg_components = df_avg_components.sort_values('MONTHLY_')
-    df_avg_components_w = df_avg_components_w.sort_values('SORT_KEYW')
+
 
     # FIG 1: Clustered Column (Talkscore Overall)
     fig1 = px.line(df_avg_overall, 
